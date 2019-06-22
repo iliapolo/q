@@ -26,8 +26,9 @@ jobs:
       name: release
       script: |
 
-        pip install py-ci
-        pyci --debug pack --path . binary --name q --entrypoint bin/q
+        curl -f -i -L https://github.com/iliapolo/pyci/releases/download/0.5.2/py-ci-$(uname -m)-$(uname -s) -o pyci
+        chmod +x pyci
+        ./pyci --debug pack --path . binary --name q --entrypoint bin/q
 
 install: pip install -r requirements.txt
 before_script: flake8 ./bin/q ./test/test-suite --count --select=E901,E999,F821,F822,F823 --show-source --statistics
