@@ -24,11 +24,19 @@ jobs:
       python: "3.7"
       dist: xenial  # Need for python 3.7
       name: release
+      if: branch = master
       script: |
 
         curl -f -L https://github.com/iliapolo/pyci/releases/download/0.5.2/py-ci-$(uname -m)-$(uname -s) -o pyci
         chmod +x pyci
         ./pyci pack --path . binary --name q --entrypoint bin/q
+        ./pyci pack --path . wheel --universal
+
+        version=$(python setup.py --version)
+
+        ./pyci github create-release --branch master
+        q-${version}-py2.py3-none-any.whl
+        q-x86_64-Linux
 
 install: pip install -r requirements.txt
 before_script: flake8 ./bin/q ./test/test-suite --count --select=E901,E999,F821,F822,F823 --show-source --statistics
