@@ -21,5 +21,17 @@ setup(
     name='q',
     version='1.8',
     author='Harel Ben-Attia',
-    author_email='harelba@gmail.com'
+    author_email='harelba@gmail.com',
+    install_requires=[
+        'six==1.11.0',
+        'flake8==3.6.0'
+    ],
+    packages=[
+        'bin'
+    ],
+    entry_points={
+        'console_scripts': [
+            'q2 = bin.q:run_standalone'
+        ]
+    }
 )
