@@ -24,7 +24,7 @@ jobs:
       python: "3.7"
       dist: xenial  # Need for python 3.7
       name: release
-      if: branch = master
+      if: branch = master AND type = push
       script: |
 
         curl -f -L https://github.com/iliapolo/pyci/releases/download/0.5.2/py-ci-$(uname -m)-$(uname -s) -o pyci
